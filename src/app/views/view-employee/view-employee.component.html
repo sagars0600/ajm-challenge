@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="back">
+    <button class="btn btn-back" (click)="getBack()">Back</button>
+  </div>
+  <div class="card mt-3">
+    <div class="card-body">
+      <div class="title">
+        <h3>Employee Profile</h3>
+      </div>
+      <div class="basic-info">
+        <h3>Basic Information</h3>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>First Name:</b> {{ employee?.emp_first_name }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>Last Name:</b> {{ employee?.emp_last_name }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>Designation:</b> {{ employee?.emp_designation }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>Salary:</b> {{ employee?.emp_salary }} INR
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>DOB:</b> {{ employee?.emp_dob }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-sm-8">
+              <p class="form-control-plaintext">
+                <b>Status:</b> {{ employee?.emp_status }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Employee Documents -->
+      <div class="tables">
+        <div class="title">
+          <h3>Documents</h3>
+        </div>
+        <div class="doc-btn">
+          <button type="button" class="btn btn-document" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Add Documents
+          </button>
+
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sn</th>
+              <th scope="col">Document Name</th>
+              <th scope="col">Document Type</th>
+              <th scope="col" colspan="2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let document of employeeDocuments; index as i">
+              <th scope="row">{{i+1}}</th>
+              <td>{{document.doc_name}}</td>
+              <td>{{document.doc_image}}</td>
+              <td>
+                <button type="button" class="btn btn-document" data-bs-toggle="modal" data-bs-target="#editBackdrop" (click)="editDocument(document.document_id)">
+                  Edit
+                </button>
+                <button type="button" class="btn btn-danger mx-3" (click)="deleteDocument(document.document_id)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="employeeDocuments?.length === 0" class="no-records">No Records Found</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Documents</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #documentForm="ngForm">
+          <div class="col-md-12">
+            <label for="validationCustom01" class="form-label">Document Name <span class="astrik">*</span></label>
+            <input type="text" class="form-control" name="filename" placeholder="Enter Document Name " [(ngModel)]="docName" required>
+          </div>
+          <div class="col-md-12 mt-2">
+            <label for="validationCustom01" class="form-label">Document File <span class="astrik">*</span></label>
+            <input type="file" class="form-control" #docImage name="docImage" (change)="handleFileInput($event)" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" (click)="submitForm(documentForm)"  data-bs-dismiss="modal">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Documents</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #documentForm="ngForm" (ngSubmit)="submitForm(documentForm)">
+          <div class="col-md-12">
+            <label for="validationCustom01" class="form-label">Document Name <span class="astrik">*</span></label>
+            <input type="text" class="form-control" name="filename" placeholder="Enter Document Name " [(ngModel)]="docName" required>
+          </div>
+          <div class="col-md-12 mt-2">
+            <label for="validationCustom01" class="form-label">Document File <span class="astrik">*</span></label>
+            <input type="file" class="form-control" #docImageInput name="docImage" (change)="handleFileInput($event)"  required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" (click)="updateDocument()" data-bs-dismiss="modal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

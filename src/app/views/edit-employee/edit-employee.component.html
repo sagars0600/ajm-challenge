@@ -1,0 +1,150 @@
+<div class="card container mt-4">
+  <div class="back">
+    <button class="btn btn-back" (click)="getBack()">Back</button>
+  </div>
+  <div class="title">
+    <h3>Edit Employee</h3>
+  </div>
+  <div class="card-body">
+    <form
+      class="row g-3 needs-validation"
+      #editUserForm="ngForm"
+      (ngSubmit)="submitForm(editUserForm)"
+    >
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">First name <span class="astrik">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationCustom01"
+          placeholder="Enter First Name"
+          required
+          [(ngModel)]="employee.firstName"
+          name="first"
+          [class.is-invalid]="editUserForm.submitted && editUserForm.controls['first'].errors?.['required']"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="editUserForm.submitted && editUserForm.controls['first'].errors?.['required']"
+        >
+          First name is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom02" class="form-label">Last name <span class="astrik">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationCustom02"
+          placeholder="Enter Last Name"
+          name="last"
+          required
+          [(ngModel)]="employee.lastName"
+          [class.is-invalid]="editUserForm.submitted && editUserForm.controls['last'].errors?.['required']"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="editUserForm.submitted && editUserForm.controls['last'].errors?.['required']"
+        >
+          Last name is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustomUsername" class="form-label">DOB <span class="astrik">*</span></label>
+        <div class="input-group has-validation">
+          <input
+            class="form-control"
+            type="text"
+            id="dob"
+            name="DOB"
+            [(ngModel)]="employee.DOB"
+            required
+            maxlength="10"
+            pattern="^\d{2}-\d{2}-\d{4}$"
+            placeholder="dd-mm-yyyy"
+            [class.is-invalid]="
+              editUserForm.submitted &&
+              !validateDOBFormat() && editUserForm.controls['DOB'].touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              editUserForm.submitted &&
+              !validateDOBFormat() &&
+              editUserForm.controls['DOB'].touched
+            "
+          >
+            Invalid DOB format. Use dd-mm-yyyy.
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="editUserForm.submitted && editUserForm.controls['DOB'].errors?.['required'] && editUserForm.controls['DOB'].touched"
+          >
+            DOB is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Designation <span class="astrik">*</span></label>
+        <input
+          type="text"
+          class="form-control"
+          id="validationCustom01"
+          placeholder="Enter Designation"
+          required
+          [(ngModel)]="employee.designation"
+          name="designation"
+          [class.is-invalid]="editUserForm.submitted && editUserForm.controls['designation'].errors?.['required']"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="editUserForm.submitted && editUserForm.controls['designation'].errors?.['required']"
+        >
+          Designation is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Salary <span class="astrik">*</span></label>
+        <input
+          type="number"
+          class="form-control"
+          id="validationCustom01"
+          placeholder="Enter Salary"
+          required
+          [(ngModel)]="employee.salary"
+          name="salary"
+          [class.is-invalid]="editUserForm.submitted && editUserForm.controls['salary'].errors?.['required']"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="editUserForm.submitted && editUserForm.controls['salary'].errors?.['required']"
+        >
+          Salary is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Status <span class="astrik">*</span></label>
+        <select
+          class="form-select"
+          [(ngModel)]="employee.status"
+          name="status"
+          required
+          [class.is-invalid]="editUserForm.submitted && editUserForm.controls['status'].errors?.['required']"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+        <div
+          class="invalid-feedback"
+          *ngIf="editUserForm.submitted && editUserForm.controls['status'].errors?.['required']"
+        >
+          Status is required.
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-back" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="employee-table">
+    <div class="title">
+      <h3>Employee List</h3>
+    </div>
+    <div class="add-btn mb-3">
+      <button class="btn btn-add" (click)="addEmployee()">Add Employee</button>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Designation</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Status</th>
+          <th scope="col" colspan="3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let list of lists">
+          <th scope="row">{{ list._id }}</th>
+          <td>{{ list.emp_first_name + " " + list.emp_last_name }}</td>
+          <td>{{ list.emp_dob }}</td>
+          <td>{{ list.emp_designation }}</td>
+          <td>{{ list.emp_salary }}</td>
+          <td>{{ list.emp_status }}</td>
+          <td>
+            <button class="btn btn-back mx-2" [routerLink]="['../view-employee', list._id]">View</button>
+            <button class="btn btn-warning mx-2" [routerLink]="['../edit-employee', list._id]">Edit</button>
+            <button class="btn btn-danger" (click)="deleteEmployee(list._id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="lists?.length === 0" class="no-records">No Records Available</p>
+  </div>
+</div>
