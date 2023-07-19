@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
 
@@ -9,7 +9,6 @@ import { EmplopyeeService } from 'src/app/services/emplopyee.service';
 })
 export class ViewEmployeeComponent implements OnInit {
   public employeeDocuments: any;
-  @ViewChild('docImageInput') docImageInputRef!: ElementRef<HTMLInputElement>;
   employee: any;
   id: any;
   docName: any;
@@ -42,13 +41,8 @@ export class ViewEmployeeComponent implements OnInit {
 
   handleFileInput(fileInput: any) {
     this.docImage = <File>fileInput.target.files[0];
-    this.updateDocImageFileName();
   }
-  updateDocImageFileName() {
-    const docImageInput = this.docImageInputRef
-      .nativeElement as HTMLInputElement;
-    docImageInput.value = this.docImage ? this.docImage.name : '';
-  }
+
   submitForm(documentForm: any) {
     const employeeId = this.id;
 
@@ -61,6 +55,8 @@ export class ViewEmployeeComponent implements OnInit {
         this.showEmployeeById(this.id);
         this.getDocumentById(this.id);
         documentForm.reset();
+        this.docName = '';
+        this.img = ''
       });
   }
 
@@ -83,6 +79,7 @@ export class ViewEmployeeComponent implements OnInit {
       .subscribe((data: any) => {
         this.docName = data.responseData.doc_name;
         this.docId = data.responseData.document_id;
+        this.img = data.responseData.doc_image
       });
   }
 

@@ -118,7 +118,7 @@
           </div>
           <div class="col-md-12 mt-2">
             <label for="validationCustom01" class="form-label">Document File <span class="astrik">*</span></label>
-            <input type="file" class="form-control" #docImage name="docImage" (change)="handleFileInput($event)" required>
+            <input type="file" class="form-control" [(ngModel)]="img" #docImage name="docImage" (change)="handleFileInput($event)" required>
           </div>
         </form>
       </div>
