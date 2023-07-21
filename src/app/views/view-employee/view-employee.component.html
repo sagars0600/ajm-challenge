@@ -67,10 +67,14 @@
           <h3>Documents</h3>
         </div>
         <div class="doc-btn">
-          <button type="button" class="btn btn-document" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <button
+            type="button"
+            class="btn btn-document"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
             Add Documents
           </button>
-
         </div>
         <table class="table">
           <thead>
@@ -83,75 +87,200 @@
           </thead>
           <tbody>
             <tr *ngFor="let document of employeeDocuments; index as i">
-              <th scope="row">{{i+1}}</th>
-              <td>{{document.doc_name}}</td>
-              <td>{{document.doc_image}}</td>
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ document.doc_name }}</td>
+              <td>{{ document.doc_image }}</td>
               <td>
-                <button type="button" class="btn btn-document" data-bs-toggle="modal" data-bs-target="#editBackdrop" (click)="editDocument(document.document_id)">
+                <button
+                  type="button"
+                  class="btn btn-document"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editBackdrop"
+                  (click)="editDocument(document.document_id)"
+                >
                   Edit
                 </button>
-                <button type="button" class="btn btn-danger mx-3" (click)="deleteDocument(document.document_id)">
+                <button
+                  type="button"
+                  class="btn btn-danger mx-3"
+                  (click)="deleteDocument(document.document_id)"
+                >
                   Delete
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <p *ngIf="employeeDocuments?.length === 0" class="no-records">No Records Found</p>
+        <p *ngIf="employeeDocuments?.length === 0" class="no-records">
+          No Records Found
+        </p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Add Documents</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <form #documentForm="ngForm">
           <div class="col-md-12">
-            <label for="validationCustom01" class="form-label">Document Name <span class="astrik">*</span></label>
-            <input type="text" class="form-control" name="filename" placeholder="Enter Document Name " [(ngModel)]="docName" required>
+            <label for="validationCustom01" class="form-label"
+              >Document Name <span class="astrik">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="filename"
+              placeholder="Enter Document Name "
+              [(ngModel)]="docName"
+              required
+              [class.is-invalid]="documentForm.submitted && documentForm.controls['docName'].errors?.['required']"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="documentForm.submitted && documentForm.controls['docName'].errors?.['required']"
+            >
+              Document Name Required.
+            </div>
+            >
           </div>
           <div class="col-md-12 mt-2">
-            <label for="validationCustom01" class="form-label">Document File <span class="astrik">*</span></label>
-            <input type="file" class="form-control" [(ngModel)]="img" #docImage name="docImage" (change)="handleFileInput($event)" required>
+            <label for="validationCustom01" class="form-label"
+              >Document File <span class="astrik">*</span></label
+            >
+            <input
+              type="file"
+              class="form-control"
+              [(ngModel)]="img"
+              #docImage
+              name="docImage"
+              (change)="handleFileInput($event)"
+              required
+              [class.is-invalid]="documentForm.submitted && documentForm.controls['img'].errors?.['required']"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="documentForm.submitted && documentForm.controls['img'].errors?.['required']"
+            >
+              File is Required
+            </div>
+
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" (click)="submitForm(documentForm)"  data-bs-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="submitForm(documentForm)"
+          data-bs-dismiss="modal"
+          [disabled]="!documentForm.valid"
+        >
+          Submit
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="editBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="editBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Edit Documents</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <form #documentForm="ngForm" (ngSubmit)="submitForm(documentForm)">
+        <form #editDocumentForm="ngForm" (ngSubmit)="submitForm(editDocumentForm)">
           <div class="col-md-12">
-            <label for="validationCustom01" class="form-label">Document Name <span class="astrik">*</span></label>
-            <input type="text" class="form-control" name="filename" placeholder="Enter Document Name " [(ngModel)]="docName" required>
+            <label for="validationCustom01" class="form-label"
+              >Document Name <span class="astrik">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="filename"
+              placeholder="Enter Document Name "
+              [(ngModel)]="docName"
+              required
+              [class.is-invalid]="editDocumentForm.submitted && editDocumentForm.controls['docName'].errors?.['required']"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="editDocumentForm.submitted && editDocumentForm.controls['docName'].errors?.['required']"
+              >
+                File is Required
+              </div>
           </div>
           <div class="col-md-12 mt-2">
-            <label for="validationCustom01" class="form-label">Document File <span class="astrik">*</span></label>
-            <input type="file" class="form-control" #docImageInput name="docImage" (change)="handleFileInput($event)"  required>
+            <label for="validationCustom01" class="form-label"
+              >Document File <span class="astrik">*</span></label
+            >
+            <input
+              type="file"
+              class="form-control"
+              #docImageInput
+              name="docImage"
+              (change)="handleFileInput($event)"
+              required
+              [class.is-invalid]="editDocumentForm.submitted && editDocumentForm.controls['img'].errors?.['required']"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="editDocumentForm.submitted && editDocumentForm.controls['img'].errors?.['required']"
+              >
+                File is Required
+              </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" (click)="updateDocument()" data-bs-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="updateDocument()"
+          data-bs-dismiss="modal"
+          [disabled]="!editDocumentForm.valid"
+        >
+          Update
+        </button>
       </div>
     </div>
   </div>

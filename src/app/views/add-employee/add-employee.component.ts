@@ -17,6 +17,7 @@ export class AddEmployeeComponent {
     DOB: '',
     lastName: '',
   };
+  department:''
   constructor(
     private employeeService: EmplopyeeService,
     private router: Router

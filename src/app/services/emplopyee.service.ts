@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environments';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,19 +22,19 @@ export class EmplopyeeService {
   }
 
   getEmployeeList() {
-    return this.http.get(this.environmentUrl + '/employees', this.httpOptions);
+    return this.http.get(environment.apiUrl + '/employees', this.httpOptions);
   }
 
   getEmployeeById(id: any) {
     return this.http.get(
-      this.environmentUrl + `/employees/${id}`,
+      environment.apiUrl + `/employees/${id}`,
       this.httpOptions
     );
   }
 
   addEmployee(body: any) {
     return this.http.post(
-      this.environmentUrl + '/employees',
+      environment.apiUrl + '/employees',
       body,
       this.httpOptions
     );
@@ -42,7 +42,7 @@ export class EmplopyeeService {
 
   updateEmployee(body: any, id: any) {
     return this.http.put(
-      this.environmentUrl + `/employees/${id}`,
+      environment.apiUrl + `/employees/${id}`,
       body,
       this.httpOptions
     );
@@ -50,7 +50,7 @@ export class EmplopyeeService {
 
   deleteEmployee(id: any) {
     return this.http.delete(
-      this.environmentUrl + `/employees/${id}`,
+      environment.apiUrl + `/employees/${id}`,
       this.httpOptions
     );
   }
@@ -65,19 +65,19 @@ export class EmplopyeeService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    return this.http.post(this.environmentUrl + url, formData, { headers });
+    return this.http.post(environment.apiUrl + url, formData, { headers });
   }
 
   getDocumentById(id: any) {
     return this.http.get(
-      this.environmentUrl + `/employees/${id}/documents`,
+      environment.apiUrl + `/employees/${id}/documents`,
       this.httpOptionData
     );
   }
 
   deleteDocuments(empId: any, docId: any) {
     return this.http.delete(
-      this.environmentUrl + `/employees/${empId}/documents/${docId}`,
+      environment.apiUrl + `/employees/${empId}/documents/${docId}`,
       this.httpOptions
     );
   }
@@ -97,19 +97,19 @@ export class EmplopyeeService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    return this.http.put(this.environmentUrl + url, formData, { headers });
+    return this.http.put(environment.apiUrl + url, formData, { headers });
   }
 
   getDocumentByEmployeeId(empId: any, docId: any) {
     return this.http.get(
-      this.environmentUrl + `/employees/${empId}/documents/${docId}`,
+      environment.apiUrl + `/employees/${empId}/documents/${docId}`,
       this.httpOptions
     );
   }
 
   searchEmployee(body: any) {
     return this.http.post(
-      this.environmentUrl + '/employees/search',
+      environment.apiUrl + '/employees/search',
       body,
       this.httpOptions
     );

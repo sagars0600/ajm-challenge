@@ -9,8 +9,10 @@
         />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form (ngSubmit)="login()">
-          <label class="form-label">Email address <span class="astrik">*</span></label>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <label class="form-label"
+            >Email address <span class="astrik">*</span></label
+          >
           <div class="form-outline mb-4">
             <input
               type="email"
@@ -19,10 +21,19 @@
               placeholder="Enter a valid email address"
               required
               [(ngModel)]="email"
+              [class.is-invalid]="loginForm.submitted && loginForm.controls['email'].errors?.['required']"
             />
+            <div
+              class="invalid-feedback"
+              *ngIf="loginForm.submitted && loginForm.controls['email'].errors?.['required']"
+            >
+             Email is Required
+            </div>
           </div>
           <div class="form-outline mb-3">
-            <label class="form-label" >Password <span class="astrik">*</span></label>
+            <label class="form-label"
+              >Password <span class="astrik">*</span></label
+            >
             <input
               type="password"
               name="password"
@@ -30,15 +41,18 @@
               placeholder="Enter password"
               required
               [(ngModel)]="password"
+              [class.is-invalid]="loginForm.submitted && loginForm.controls['email'].errors?.['required']"
             />
+            <div
+              class="invalid-feedback"
+              *ngIf="loginForm.submitted && loginForm.controls['email'].errors?.['required']"
+            >
+              Password is Required
+            </div>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <div class="form-check mb-0">
-              <input
-                class="form-check-input me-2"
-                type="checkbox"
-                value=""
-              />
+              <input class="form-check-input me-2" type="checkbox" value="" />
               <label class="form-check-label" for="form2Example3">
                 Remember me
               </label>
@@ -47,12 +61,7 @@
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button
-              type="submit"
-              class="btn btn-login btn-lg"
-            >
-              Login
-            </button>
+            <button type="submit" class="btn btn-login btn-lg">Login</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">
               Don't have an account?
               <a href="#!" class="link-register">Register</a>

@@ -15,9 +15,11 @@ export class LoginComponent {
   login() {
     if (this.email === 'admin123@gmail.com' && this.password === 'admin') {
       this.router.navigate(['/dashboard']);
-      console.log('Login successful!');
-    } else {
-      alert('Invalid credentials!');
+    } else if (
+      this.email !== 'admin123@gmail.com' &&
+      this.password !== 'admin'
+    ) {
+      alert('Invalid Email & password');
     }
   }
 }
