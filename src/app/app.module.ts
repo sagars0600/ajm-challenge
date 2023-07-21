@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './views/employee-list/employee-list.component';
-import { LoginComponent } from './views/login/login.component';
-import { AddEmployeeComponent } from './views/add-employee/add-employee.component';
-import { EditEmployeeComponent } from './views/edit-employee/edit-employee.component';
-import { ViewEmployeeComponent } from './views/view-employee/view-employee.component';
+import { EmployeeListComponent } from './views/employee-module/employee-list/employee-list.component';
+import { AddEmployeeComponent } from './views/employee-module/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './views/employee-module/edit-employee/edit-employee.component';
+import { ViewEmployeeComponent } from './views/employee-module/view-employee/view-employee.component';
 
 
 
@@ -16,12 +15,9 @@ import { ViewEmployeeComponent } from './views/view-employee/view-employee.compo
   declarations: [
     AppComponent,
     EmployeeListComponent,
-    LoginComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
     ViewEmployeeComponent,
-
-
   ],
   imports: [
     BrowserModule,

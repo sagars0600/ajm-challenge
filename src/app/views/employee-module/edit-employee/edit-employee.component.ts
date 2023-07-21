@@ -41,10 +41,10 @@ export class EditEmployeeComponent implements OnInit {
     this.employeeService.getEmployeeById(this.id).subscribe((data: any) => {
       this.employee.firstName = data.responseData.emp_first_name;
       (this.employee.lastName = data.responseData.emp_last_name),
-        (this.employee.DOB = data.responseData.emp_dob),
-        (this.employee.salary = data.responseData.emp_salary),
-        (this.employee.designation = data.responseData.emp_designation),
-        (this.employee.status = data.responseData.emp_status);
+      (this.employee.DOB = data.responseData.emp_dob),
+      (this.employee.salary = data.responseData.emp_salary),
+      (this.employee.designation = data.responseData.emp_designation),
+      (this.employee.status = data.responseData.emp_status);
     });
   }
 
