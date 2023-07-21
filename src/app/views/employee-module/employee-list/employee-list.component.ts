@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
+import { Store } from '@ngrx/store';
+import { login, logout } from '../../auth-module/auth.action';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,10 +12,12 @@ import { EmplopyeeService } from 'src/app/services/emplopyee.service';
 })
 export class EmployeeListComponent implements OnInit {
   public lists: any;
+  logoutError: string | null = null;
   constructor(
     private employeeService: EmplopyeeService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ) {}
   ngOnInit(): void {
     this.getAllEmployees();
@@ -36,8 +40,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   logOut() {
-    this.authService.logout().subscribe((data: any) => {
-      this.router.navigate(['']);
-    });
+    this.store.dispatch(logout());
   }
 }

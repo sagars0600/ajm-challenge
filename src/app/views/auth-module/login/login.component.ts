@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { login } from '../auth.action';
+import { AppState } from '../../../app-state-model';
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +14,18 @@ export class LoginComponent {
   email: any;
   password: any;
 
-  constructor(private router: Router,private authService: AuthService) {}
+  loginError: string | null = null; // Add a variable to hold the login error message
+
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   login() {
-    if (this.authService.login(this.email, this.password)) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      alert('Invalid Email & password');
-    }
+    this.store.dispatch(login({ email: this.email, password: this.password }));
+    this.store.pipe(select((state: AppState) => state.auth)).subscribe((authState:any) => {
+      if (authState.isLoggedIn) {
+        this.router.navigate(['/dashboard']);
+      } else if (authState.error) {
+        this.loginError = authState.error;
+      }
+    });
   }
 }

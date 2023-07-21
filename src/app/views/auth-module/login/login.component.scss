@@ -23,6 +23,17 @@
 .link-register{
   color: lightseagreen;
 }
+
+.error-message{
+  display: flex;
+  justify-content: center;
+}
+
+.error{
+  color: red;
+  font-size: 21px;
+  font-style: italic;
+}
 @media (max-width: 450px) {
   .h-custom {
     height: 100%;

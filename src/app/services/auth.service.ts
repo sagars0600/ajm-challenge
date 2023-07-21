@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs'
+import { Observable, of } from 'rxjs';
+import { User } from '../views/auth-module/auth.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,20 +9,20 @@ export class AuthService {
   private readonly EMAIL_KEY = 'email';
   private readonly PASSWORD_KEY = 'password';
 
-  login(email: string, password: string): boolean {
+  login(email: string, password: string): Observable<boolean> {
     if (email === 'admin123@gmail.com' && password === 'admin') {
       localStorage.setItem(this.EMAIL_KEY, email);
       localStorage.setItem(this.PASSWORD_KEY, password);
-      return true;
+      return of(true);
     } else {
-      return false;
+      return of(false);
     }
   }
 
   logout(): Observable<any> {
     localStorage.removeItem(this.EMAIL_KEY);
     localStorage.removeItem(this.PASSWORD_KEY);
-    return of(true); // Return a simple observable that emits true when logout is completed.
+    return of(true);
   }
 
   isAuthenticated(): boolean {
