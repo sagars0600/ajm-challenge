@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
+import { Store } from '@ngrx/store';
+import { addEmployee } from '../../../../store/employee/employee.action';
+import { Employee } from '../../../../store/employee/employee.model';
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -20,7 +23,8 @@ export class AddEmployeeComponent {
   errorMessage = '';
   constructor(
     private employeeService: EmplopyeeService,
-    private router: Router
+    private router: Router,
+    private store: Store,
   ) {}
 
   validateDOBFormat(): boolean {
@@ -41,23 +45,17 @@ export class AddEmployeeComponent {
     ) {
       return;
     }
-    let body = {
+    const newEmployee: Employee =  {
       emp_first_name: this.employee.firstName,
       emp_last_name: this.employee.lastName,
       emp_dob: this.employee.DOB,
-      emp_salary: this.employee.salary,
+      emp_salary: +this.employee.salary,
       emp_designation: this.employee.designation,
       emp_status: this.employee.status,
     };
 
-    this.employeeService.addEmployee(body).subscribe(
-      (data: any) => {
-        this.router.navigate(['/dashboard']);
-      },
-      (error) => {
-        alert(error.error.error);
-      }
-    );
+    this.store.dispatch(addEmployee({ employee: newEmployee }));
+    addUserForm.resetForm();
   }
 
   getBack() {

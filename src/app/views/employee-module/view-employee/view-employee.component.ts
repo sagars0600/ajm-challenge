@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-view-employee',
@@ -19,7 +20,8 @@ export class ViewEmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmplopyeeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

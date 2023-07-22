@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
+import { Employee } from '../../store/employee/employee.model';
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,8 +23,8 @@ export class EmplopyeeService {
     };
   }
 
-  getEmployeeList() {
-    return this.http.get(environment.apiUrl + '/employees', this.httpOptions);
+  getEmployeeList(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(environment.apiUrl + '/employees');
   }
 
   getEmployeeById(id: any) {
@@ -32,14 +34,16 @@ export class EmplopyeeService {
     );
   }
 
-  addEmployee(body: any) {
-    return this.http.post(
-      environment.apiUrl + '/employees',
-      body,
-      this.httpOptions
-    );
+  addEmployee(body: any): Observable<Employee> {
+    return this.http.post<Employee>(environment.apiUrl + '/employees', body, this.httpOptions)
+      .pipe(
+        map((response: any) => {
+          // Assuming the API response contains the created employee data,
+          // you might need to adjust this based on your API response structure
+          return response as Employee;
+        })
+      );
   }
-
   updateEmployee(body: any, id: any) {
     return this.http.put(
       environment.apiUrl + `/employees/${id}`,

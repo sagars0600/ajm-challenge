@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
 import { Store } from '@ngrx/store';
-import { login, logout } from '../../../../store/auth/auth.action';
-
+import { logout } from '../../../../store/auth/auth.action';
+import { AppState } from '../../../../store/app-state-model';
+import { loadEmployees } from './../../../../store/employee/employee.action';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -17,9 +18,10 @@ export class EmployeeListComponent implements OnInit {
     private employeeService: EmplopyeeService,
     private router: Router,
     private authService: AuthService,
-    private store: Store
+    private store: Store,
   ) {}
   ngOnInit(): void {
+    this.store.dispatch(loadEmployees());
     this.getAllEmployees();
   }
 
