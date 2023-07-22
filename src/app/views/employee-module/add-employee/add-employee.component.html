@@ -58,7 +58,7 @@
             placeholder="dd-mm-yyyy"
             [class.is-invalid]="
               addUserForm.submitted &&
-              !validateDOBFormat() && addUserForm.controls['DOB'].touched
+              !validateDOBFormat() && addUserForm.controls['DOB'].touched && addUserForm.controls['DOB'].errors?.['required']
             "
           />
           <div

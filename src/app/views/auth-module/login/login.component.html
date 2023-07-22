@@ -1,8 +1,6 @@
 <section class="vh-100">
   <div class="container-fluid h-custom">
-    <div *ngIf="loginError" class="error-message">
-      <p class="error">{{ loginError }}</p>
-    </div>
+
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
         <img
@@ -12,6 +10,9 @@
         />
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <div *ngIf="loginError" class="error-message">
+          <p class="error">{{ loginError }}</p>
+        </div>
         <form (ngSubmit)="login()" #loginForm="ngForm">
           <label class="form-label"
             >Email address <span class="astrik">*</span></label

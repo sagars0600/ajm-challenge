@@ -10,7 +10,7 @@ import { AuthModuleModule } from './views/auth-module/auth-module.module';
 import { EmployeeModuleModule } from './views/employee-module/employee-module.module';
 import { AuthEffects } from './views/auth-module/auth.effects';
 import { authReducer } from './views/auth-module/auth.reducer';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +25,7 @@ import { authReducer } from './views/auth-module/auth.reducer';
     EmployeeModuleModule,
     StoreModule.forRoot({ auth: authReducer }),
     EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]
