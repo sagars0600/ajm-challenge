@@ -24,7 +24,7 @@ export class AddEmployeeComponent {
   ) {}
 
   validateDOBFormat(): boolean {
-    const dobRegex = /^\d{2}-\d{2}-\d{4}$/;
+    const dobRegex = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
     const value = this.employee.DOB;
     return dobRegex.test(value);
   }
