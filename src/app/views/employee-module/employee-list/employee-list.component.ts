@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
 import { Store } from '@ngrx/store';
-import { login, logout } from '../../auth-module/auth.action';
+import { login, logout } from '../../../../store/auth/auth.action';
 
 @Component({
   selector: 'app-employee-list',

@@ -8,8 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { AuthModuleModule } from './views/auth-module/auth-module.module';
 import { EmployeeModuleModule } from './views/employee-module/employee-module.module';
-import { AuthEffects } from './views/auth-module/auth.effects';
-import { authReducer } from './views/auth-module/auth.reducer';
+import { AuthEffects } from '../store/auth/auth.effects';
+import { authReducer } from '../store/auth/auth.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
