@@ -12,7 +12,9 @@
       (ngSubmit)="submitForm(addUserForm)"
     >
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">First name <span class="astrik">*</span></label>
+        <label for="validationCustom01" class="form-label"
+          >First name <span class="astrik">*</span></label
+        >
         <input
           type="text"
           class="form-control"
@@ -23,12 +25,17 @@
           name="first"
           [class.is-invalid]="addUserForm.submitted && addUserForm.controls['first'].errors?.['required']"
         />
-        <div class="invalid-feedback" *ngIf="addUserForm.submitted && addUserForm.controls['first'].errors?.['required']">
+        <div
+          class="invalid-feedback"
+          *ngIf="addUserForm.submitted && addUserForm.controls['first'].errors?.['required']"
+        >
           First name is required.
         </div>
       </div>
       <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Last name <span class="astrik">*</span></label>
+        <label for="validationCustom02" class="form-label"
+          >Last name <span class="astrik">*</span></label
+        >
         <input
           type="text"
           class="form-control"
@@ -39,12 +46,17 @@
           name="last"
           [class.is-invalid]="addUserForm.submitted && addUserForm.controls['last'].errors?.['required']"
         />
-        <div class="invalid-feedback" *ngIf="addUserForm.submitted && addUserForm.controls['last'].errors?.['required']">
+        <div
+          class="invalid-feedback"
+          *ngIf="addUserForm.submitted && addUserForm.controls['last'].errors?.['required']"
+        >
           Last name is required.
         </div>
       </div>
       <div class="col-md-4">
-        <label for="validationCustomUsername" class="form-label">DOB <span class="astrik">*</span></label>
+        <label for="validationCustomUsername" class="form-label"
+          >DOB <span class="astrik">*</span></label
+        >
         <div class="input-group has-validation">
           <input
             class="form-control"
@@ -58,29 +70,27 @@
             placeholder="dd-mm-yyyy"
             [class.is-invalid]="
               addUserForm.submitted &&
-              !validateDOBFormat() && addUserForm.controls['DOB'].touched && addUserForm.controls['DOB'].errors?.['required']
+              !validateDOBFormat() && (addUserForm.controls['DOB'].touched || addUserForm.controls['DOB'].errors?.['required'])
             "
           />
           <div
             class="invalid-feedback"
-            *ngIf="
-              addUserForm.submitted &&
-              !validateDOBFormat() &&
-              addUserForm.controls['DOB'].touched
-            "
+            *ngIf="addUserForm.submitted && !validateDOBFormat()"
           >
             Invalid DOB format. Use dd-mm-yyyy.
           </div>
           <div
             class="invalid-feedback"
-            *ngIf="addUserForm.submitted && addUserForm.controls['DOB'].errors?.['required'] && addUserForm.controls['DOB'].touched"
+            *ngIf="addUserForm.submitted && (addUserForm.controls['DOB'].touched || addUserForm.controls['DOB'].errors?.['required'])"
           >
             DOB is required.
           </div>
         </div>
       </div>
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Designation <span class="astrik">*</span></label>
+        <label for="validationCustom01" class="form-label"
+          >Designation <span class="astrik">*</span></label
+        >
         <input
           type="text"
           class="form-control"
@@ -91,12 +101,17 @@
           name="designation"
           [class.is-invalid]="addUserForm.submitted && addUserForm.controls['designation'].errors?.['required']"
         />
-        <div class="invalid-feedback" *ngIf="addUserForm.submitted && addUserForm.controls['designation'].errors?.['required']">
+        <div
+          class="invalid-feedback"
+          *ngIf="addUserForm.submitted && addUserForm.controls['designation'].errors?.['required']"
+        >
           Designation is required.
         </div>
       </div>
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Salary <span class="astrik">*</span></label>
+        <label for="validationCustom01" class="form-label"
+          >Salary <span class="astrik">*</span></label
+        >
         <input
           type="number"
           class="form-control"
@@ -107,17 +122,31 @@
           name="salary"
           [class.is-invalid]="addUserForm.submitted && addUserForm.controls['salary'].errors?.['required']"
         />
-        <div class="invalid-feedback" *ngIf="addUserForm.submitted && addUserForm.controls['salary'].errors?.['required']">
+        <div
+          class="invalid-feedback"
+          *ngIf="addUserForm.submitted && addUserForm.controls['salary'].errors?.['required']"
+        >
           Salary is required.
         </div>
       </div>
       <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Status <span class="astrik">*</span></label>
-        <select class="form-select" [(ngModel)]="employee.status" name="status" required [class.is-invalid]="addUserForm.submitted && addUserForm.controls['status'].errors?.['required']">
+        <label for="validationCustom01" class="form-label"
+          >Status <span class="astrik">*</span></label
+        >
+        <select
+          class="form-select"
+          [(ngModel)]="employee.status"
+          name="status"
+          required
+          [class.is-invalid]="addUserForm.submitted && addUserForm.controls['status'].errors?.['required']"
+        >
           <option value="1">1</option>
           <option value="2">2</option>
         </select>
-        <div class="invalid-feedback" *ngIf="addUserForm.submitted && addUserForm.controls['status'].errors?.['required']">
+        <div
+          class="invalid-feedback"
+          *ngIf="addUserForm.submitted && addUserForm.controls['status'].errors?.['required']"
+        >
           Status is required.
         </div>
       </div>
