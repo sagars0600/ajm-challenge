@@ -74,7 +74,7 @@ export class EditEmployeeComponent implements OnInit {
 
       },
       (error) => {
-        console.log(error.message);
+        alert(error.error.error);
       }
     );
   }

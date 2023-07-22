@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmplopyeeService } from 'src/app/services/emplopyee.service';
-
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -17,7 +16,8 @@ export class AddEmployeeComponent {
     DOB: '',
     lastName: '',
   };
-  department:''
+  department: '';
+  errorMessage = '';
   constructor(
     private employeeService: EmplopyeeService,
     private router: Router
@@ -55,7 +55,7 @@ export class AddEmployeeComponent {
         this.router.navigate(['/dashboard']);
       },
       (error) => {
-        alert(error.message);
+        alert(error.error.error);
       }
     );
   }
